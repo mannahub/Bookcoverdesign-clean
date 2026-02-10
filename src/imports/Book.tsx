@@ -147,11 +147,32 @@ export default function Book({
   const palette = BOOK_COLORS[color];
   const pat = BOOK_PATTERNS[pattern];
 
-  // Smart text truncation based on character count
-  const displayTitle = useMemo(() => {
-    const maxChars = 12;
-    if (title.length <= maxChars) return title;
-    return title.slice(0, maxChars - 1) + '…';
+  // Smart text sizing: 20 chars normal, then dynamic reduction, truncate at 30
+  const { displayTitle, fontSize } = useMemo(() => {
+    const len = title.length;
+    
+    // Truncate if over 30 characters
+    if (len > 30) {
+      return {
+        displayTitle: title.slice(0, 29) + '…',
+        fontSize: 13
+      };
+    }
+    
+    // Dynamic font size reduction for 20-30 chars
+    if (len > 20) {
+      const reduction = (len - 20) * 0.6; // 0.6px per char over 20
+      return {
+        displayTitle: title,
+        fontSize: Math.max(13, 19 - reduction)
+      };
+    }
+    
+    // Normal size for <= 20 chars
+    return {
+      displayTitle: title,
+      fontSize: 19
+    };
   }, [title]);
 
   // Use dark patterns for white background
@@ -448,7 +469,7 @@ export default function Book({
           <div
             className={`absolute inset-0 flex items-center justify-center ${palette.textClass} font-bold`}
             style={{
-              fontSize: '19px',
+              fontSize: `${fontSize}px`,
               fontFamily: 'Geist',
               fontWeight: 700,
               color: palette.textColor,
@@ -457,8 +478,10 @@ export default function Book({
               textAlign: 'center',
               lineHeight: 1.3,
               wordBreak: 'break-word',
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
               overflow: 'hidden',
-              textOverflow: 'ellipsis',
             }}
           >
             {displayTitle}
