@@ -333,7 +333,6 @@ export default function Book({
           className="absolute"
           initial={false}
           style={{
-            left: 5,
             top: 4,
             width: 195,
             height: 264,
@@ -343,6 +342,7 @@ export default function Book({
             pointerEvents: 'none',
           }}
           animate={{
+            left: hovered ? 7 : 5,
             opacity: hovered ? 1 : 0,
           }}
           transition={{
