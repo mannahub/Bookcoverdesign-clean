@@ -278,11 +278,12 @@ export default function Book({
             height: 256,
             clipPath: `url(#squircle-sheet-1-${clipId})`,
             zIndex: 4,
-            background: '#ffffff',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
+            background: '#f5f5f5',
+            border: '1px solid rgba(0,0,0,0.08)',
+            boxShadow: '0 2px 6px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.8)',
           }}
           animate={{
-            opacity: hovered ? 0.85 : 0,
+            opacity: hovered ? 0.92 : 0,
           }}
           transition={{
             duration: hovered ? 0.18 : 0.1,
@@ -306,11 +307,12 @@ export default function Book({
             height: 252,
             clipPath: `url(#squircle-sheet-2-${clipId})`,
             zIndex: 4,
-            background: '#fafafa',
-            boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
+            background: '#ebebeb',
+            border: '1px solid rgba(0,0,0,0.1)',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.6)',
           }}
           animate={{
-            opacity: hovered ? 0.7 : 0,
+            opacity: hovered ? 0.88 : 0,
           }}
           transition={{
             duration: hovered ? 0.18 : 0.1,
