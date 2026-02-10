@@ -260,7 +260,8 @@ export default function Book({
           style={{ clipPath: `url(#squircle-back-${clipId})`, zIndex: 1, background: palette.lo }}
         />
 
-        {/* ── Pages - Doua foi vizibile la hover ── */}
+        {/* ── Pages - Doua foi suprapuse + umbră ── */}
+        {/* Prima pagină - alb */}
         <svg className="absolute" width="194" height="264" style={{ left: 3, top: 2, pointerEvents: 'none', zIndex: 3 }}>
           <defs>
             <clipPath id={`squircle-sheet-1-${clipId}`}>
@@ -279,17 +280,17 @@ export default function Book({
             clipPath: `url(#squircle-sheet-1-${clipId})`,
             zIndex: 3,
             background: '#ffffff',
-            boxShadow: '-2px 0 8px rgba(0,0,0,0.08)',
           }}
           animate={{
-            opacity: hovered ? 0.95 : 0,
+            opacity: hovered ? 1 : 0,
           }}
           transition={{
             duration: hovered ? 0.18 : 0.1,
             ease: hovered ? [0.25, 0.46, 0.45, 0.94] : [0.55, 0.085, 0.68, 0.53],
           }}
         />
-        <svg className="absolute" width="197" height="266" style={{ left: 1.5, top: 1, pointerEvents: 'none', zIndex: 4 }}>
+        {/* A doua pagină - gri léger */}
+        <svg className="absolute" width="197" height="266" style={{ left: 1.5, top: 1, pointerEvents: 'none', zIndex: 3.5 }}>
           <defs>
             <clipPath id={`squircle-sheet-2-${clipId}`}>
               <path d={squircleSheet2Path} />
@@ -305,12 +306,32 @@ export default function Book({
             width: 197,
             height: 266,
             clipPath: `url(#squircle-sheet-2-${clipId})`,
-            zIndex: 4,
-            background: '#fafafa',
-            boxShadow: '-2px 0 10px rgba(0,0,0,0.1)',
+            zIndex: 3.5,
+            background: '#f5f5f5',
           }}
           animate={{
-            opacity: hovered ? 0.98 : 0,
+            opacity: hovered ? 1 : 0,
+          }}
+          transition={{
+            duration: hovered ? 0.18 : 0.1,
+            ease: hovered ? [0.25, 0.46, 0.45, 0.94] : [0.55, 0.085, 0.68, 0.53],
+          }}
+        />
+        {/* Umbră finală */}
+        <motion.div
+          className="absolute"
+          initial={false}
+          style={{
+            left: 0,
+            top: 0,
+            width: 200,
+            height: 268,
+            zIndex: 4,
+            boxShadow: 'inset -3px 0 8px rgba(0,0,0,0.15)',
+            pointerEvents: 'none',
+          }}
+          animate={{
+            opacity: hovered ? 1 : 0,
           }}
           transition={{
             duration: hovered ? 0.18 : 0.1,
