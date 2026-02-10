@@ -404,16 +404,18 @@ export default function Book({
             />
           )}
 
-          {/* Linen texture */}
-          <div
-            className="absolute inset-0 opacity-[0.07]"
-            style={{
-              backgroundImage: [
-                'repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.4) 3px, rgba(255,255,255,0.4) 4px)',
-                'repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(255,255,255,0.3) 3px, rgba(255,255,255,0.3) 4px)',
-              ].join(', '),
-            }}
-          />
+          {/* Linen texture - only for 'simplu' pattern */}
+          {pattern === 'simplu' && (
+            <div
+              className="absolute inset-0 opacity-[0.07]"
+              style={{
+                backgroundImage: [
+                  'repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.4) 3px, rgba(255,255,255,0.4) 4px)',
+                  'repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(255,255,255,0.3) 3px, rgba(255,255,255,0.3) 4px)',
+                ].join(', '),
+              }}
+            />
+          )}
 
           {/* Grain noise */}
           <div
