@@ -1,19 +1,76 @@
 import { useState } from 'react';
+import { getSvgPath } from 'figma-squircle';
+import { motion } from 'motion/react';
 
 // ── Color palettes ───────────────────────────────────────────
-export type BookColor = 'violet' | 'blue' | 'emerald' | 'rose' | 'amber';
+export type BookColor = 'violet' | 'blue' | 'emerald' | 'rose' | 'amber' | 'slate' | 'white';
 
 export const BOOK_COLORS: Record<BookColor, {
   hi: string; mid: string; lo: string;
   spine: string; edge: string; textClass: string;
   label: string;
+  textColor: string;
+  textShadow: string;
 }> = {
-  violet:  { hi: '#9069f5', mid: '#8250f0', lo: '#7338e0', spine: '#8250f0', edge: 'rgba(100,50,200,0.55)',  textClass: 'text-violet-900',  label: 'Violet'  },
-  blue:    { hi: '#60a5fa', mid: '#3b82f6', lo: '#2563eb', spine: '#3b82f6', edge: 'rgba(30,64,175,0.55)',   textClass: 'text-blue-900',    label: 'Albastru'},
-  emerald: { hi: '#34d399', mid: '#10b981', lo: '#059669', spine: '#10b981', edge: 'rgba(6,95,70,0.55)',     textClass: 'text-emerald-900', label: 'Verde'   },
-  rose:    { hi: '#fb7185', mid: '#e11d48', lo: '#be123c', spine: '#e11d48', edge: 'rgba(159,18,57,0.55)',   textClass: 'text-rose-900',    label: 'Roșu'    },
-  amber:   { hi: '#fbbf24', mid: '#d97706', lo: '#b45309', spine: '#d97706', edge: 'rgba(146,64,14,0.55)',   textClass: 'text-amber-900',   label: 'Auriu'   },
+  violet:  { 
+    hi: '#a78bfa', mid: '#8b5cf6', lo: '#7c3aed', 
+    spine: '#8b5cf6', edge: 'rgba(109,40,217,0.6)',  
+    textClass: 'text-white',  
+    label: 'Violet',
+    textColor: 'rgba(255,255,255,0.98)',
+    textShadow: '0 1px 0 rgba(0,0,0,0.25), 0 -1px 0 rgba(255,255,255,0.12)'
+  },
+  blue:    { 
+    hi: '#60a5fa', mid: '#3b82f6', lo: '#2563eb', 
+    spine: '#3b82f6', edge: 'rgba(29,78,216,0.6)',   
+    textClass: 'text-white',    
+    label: 'Albastru',
+    textColor: 'rgba(255,255,255,0.98)',
+    textShadow: '0 1px 0 rgba(0,0,0,0.25), 0 -1px 0 rgba(255,255,255,0.12)'
+  },
+  emerald: { 
+    hi: '#34d399', mid: '#10b981', lo: '#059669', 
+    spine: '#10b981', edge: 'rgba(4,120,87,0.6)',     
+    textClass: 'text-white', 
+    label: 'Verde',
+    textColor: 'rgba(255,255,255,0.98)',
+    textShadow: '0 1px 0 rgba(0,0,0,0.25), 0 -1px 0 rgba(255,255,255,0.12)'
+  },
+  rose:    { 
+    hi: '#fb7185', mid: '#f43f5e', lo: '#e11d48', 
+    spine: '#f43f5e', edge: 'rgba(190,18,60,0.6)',   
+    textClass: 'text-white',    
+    label: 'Roșu',
+    textColor: 'rgba(255,255,255,0.98)',
+    textShadow: '0 1px 0 rgba(0,0,0,0.25), 0 -1px 0 rgba(255,255,255,0.12)'
+  },
+  amber:   { 
+    hi: '#fcd34d', mid: '#f59e0b', lo: '#d97706', 
+    spine: '#f59e0b', edge: 'rgba(180,83,9,0.6)',   
+    textClass: 'text-amber-950',   
+    label: 'Auriu',
+    textColor: 'rgba(20,16,5,0.88)',
+    textShadow: '0 1px 0 rgba(255,255,255,0.4), 0 -1px 0 rgba(0,0,0,0.15)'
+  },
+  slate:   { 
+    hi: '#64748b', mid: '#475569', lo: '#334155', 
+    spine: '#475569', edge: 'rgba(30,41,59,0.6)',   
+    textClass: 'text-white',   
+    label: 'Gri închis',
+    textColor: 'rgba(255,255,255,0.98)',
+    textShadow: '0 1px 0 rgba(0,0,0,0.25), 0 -1px 0 rgba(255,255,255,0.12)'
+  },
+  white:   { 
+    hi: '#ffffff', mid: '#f8fafc', lo: '#e2e8f0', 
+    spine: '#f1f5f9', edge: 'rgba(148,163,184,0.6)',   
+    textClass: 'text-slate-800',   
+    label: 'Alb',
+    textColor: 'rgba(30,41,59,0.92)',
+    textShadow: '0 1px 0 rgba(255,255,255,0.6), 0 -1px 0 rgba(0,0,0,0.08)'
+  },
 };
+
+export const COLOR_KEYS: BookColor[] = ['violet', 'blue', 'emerald', 'rose', 'amber', 'slate', 'white'];
 
 // ── Patterns ─────────────────────────────────────────────────
 export type BookPattern = 'simplu' | 'dictando' | 'matematica' | 'romana' | 'punctat';
@@ -22,6 +79,7 @@ export interface PatternDef {
   label: string;
   backgroundImage: string;
   backgroundSize?: string;
+  darkBackgroundImage?: string; // For light backgrounds like white
 }
 
 export const BOOK_PATTERNS: Record<BookPattern, PatternDef> = {
@@ -32,27 +90,39 @@ export const BOOK_PATTERNS: Record<BookPattern, PatternDef> = {
   dictando: {
     label: 'Dictando',
     backgroundImage: [
-      'repeating-linear-gradient(180deg, transparent, transparent 19px, rgba(255,255,255,0.16) 19px, rgba(255,255,255,0.16) 20px)',
+      'repeating-linear-gradient(180deg, transparent, transparent 18px, rgba(255,255,255,0.15) 18px, rgba(255,255,255,0.15) 20px)',
+    ].join(', '),
+    darkBackgroundImage: [
+      'repeating-linear-gradient(180deg, transparent, transparent 18px, rgba(0,0,0,0.08) 18px, rgba(0,0,0,0.08) 20px)',
     ].join(', '),
   },
   matematica: {
     label: 'Matematică',
     backgroundImage: [
-      'repeating-linear-gradient(180deg, transparent, transparent 15px, rgba(255,255,255,0.14) 15px, rgba(255,255,255,0.14) 16px)',
-      'repeating-linear-gradient(90deg, transparent, transparent 15px, rgba(255,255,255,0.14) 15px, rgba(255,255,255,0.14) 16px)',
+      'repeating-linear-gradient(180deg, transparent, transparent 14px, rgba(255,255,255,0.12) 14px, rgba(255,255,255,0.12) 16px)',
+      'repeating-linear-gradient(90deg, transparent, transparent 14px, rgba(255,255,255,0.12) 14px, rgba(255,255,255,0.12) 16px)',
+    ].join(', '),
+    darkBackgroundImage: [
+      'repeating-linear-gradient(180deg, transparent, transparent 14px, rgba(0,0,0,0.07) 14px, rgba(0,0,0,0.07) 16px)',
+      'repeating-linear-gradient(90deg, transparent, transparent 14px, rgba(0,0,0,0.07) 14px, rgba(0,0,0,0.07) 16px)',
     ].join(', '),
   },
   romana: {
     label: 'Română',
     backgroundImage: [
-      'repeating-linear-gradient(104.8deg, transparent, transparent 31.5px, rgba(255,255,255,0.14) 31.5px, rgba(255,255,255,0.14) 32.5px)',
-      'repeating-linear-gradient(180deg, transparent, transparent 52px, rgba(255,255,255,0.11) 52px, rgba(255,255,255,0.11) 53px)',
+      'repeating-linear-gradient(104.8deg, transparent, transparent 30px, rgba(255,255,255,0.13) 30px, rgba(255,255,255,0.13) 32px)',
+      'repeating-linear-gradient(180deg, transparent, transparent 50px, rgba(255,255,255,0.1) 50px, rgba(255,255,255,0.1) 52px)',
+    ].join(', '),
+    darkBackgroundImage: [
+      'repeating-linear-gradient(104.8deg, transparent, transparent 30px, rgba(0,0,0,0.08) 30px, rgba(0,0,0,0.08) 32px)',
+      'repeating-linear-gradient(180deg, transparent, transparent 50px, rgba(0,0,0,0.06) 50px, rgba(0,0,0,0.06) 52px)',
     ].join(', '),
   },
   punctat: {
     label: 'Punctat',
-    backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1px)',
-    backgroundSize: '14px 14px',
+    backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.18) 1.2px, transparent 1.2px)',
+    backgroundSize: '12px 12px',
+    darkBackgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.1) 1.2px, transparent 1.2px)',
   },
 };
 
@@ -76,6 +146,11 @@ export default function Book({
   const palette = BOOK_COLORS[color];
   const pat = BOOK_PATTERNS[pattern];
 
+  // Use dark patterns for white background
+  const patternImage = color === 'white' && pat.darkBackgroundImage 
+    ? pat.darkBackgroundImage 
+    : pat.backgroundImage;
+
   // ── Physics ────────────────────────────────────────────────
   const SPRING  = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
   const GRAVITY = 'cubic-bezier(0.4, 0, 1, 1)';
@@ -88,12 +163,34 @@ export default function Book({
   const ANGLE = -4;
   const PERSP = 600;
 
+  // ── Squircle paths ──
+  const squirclePath = getSvgPath({ width: 200, height: 268, cornerRadius: 20, cornerSmoothing: 1 });
+  const squirclePathPages = getSvgPath({ width: 200, height: 266, cornerRadius: 20, cornerSmoothing: 1 });
+  const squirclePathFront = (h: number) => getSvgPath({ width: 200, height: h, cornerRadius: 20, cornerSmoothing: 1 });
+
   return (
     <div
       className={`${className || ''}`}
       style={{ perspective: `${PERSP}px`, width: 200, height: 268 }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      role="button"
+      tabIndex={0}
+      aria-label={`Caiet ${title}`}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          setHovered(true);
+        }
+      }}
+      onKeyUp={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          setHovered(false);
+        }
+      }}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
     >
       <div
         style={{
@@ -107,6 +204,44 @@ export default function Book({
           cursor: 'pointer',
         }}
       >
+        {/* ── Back cover ── */}
+        <svg className="absolute w-[200px] h-[268px] left-0 top-0" style={{ pointerEvents: 'none' }}>
+          <defs>
+            <clipPath id="squircle-back">
+              <path d={squirclePath} />
+            </clipPath>
+          </defs>
+        </svg>
+        <div 
+          className="w-[200px] h-[268px] left-0 top-0 absolute bg-white shadow-[0px_1px_1px_0px_rgba(0,0,0,0.15)]" 
+          style={{ clipPath: 'url(#squircle-back)' }}
+        />
+
+        {/* ── Pages - O singură foaie vizibilă la hover ── */}
+        <svg className="absolute w-[196px] h-[262px] left-[4px] top-[4px]" style={{ pointerEvents: 'none', zIndex: 3 }}>
+          <defs>
+            <clipPath id="squircle-page">
+              <path d={getSvgPath({ width: 196, height: 262, cornerRadius: 20, cornerSmoothing: 1 })} />
+            </clipPath>
+          </defs>
+        </svg>
+        <motion.div
+          className="w-[196px] h-[262px] left-[4px] top-[4px] absolute"
+          style={{
+            clipPath: 'url(#squircle-page)',
+            zIndex: 3,
+            background: '#c8c8c8',
+            boxShadow: '0 2px 6px rgba(0,0,0,0.15), inset 0 1px 2px rgba(255,255,255,0.3)',
+          }}
+          animate={{
+            opacity: hovered ? 1 : 0,
+          }}
+          transition={{
+            duration: hovered ? 0.2 : 0.1,
+            ease: hovered ? [0.25, 0.46, 0.45, 0.94] : [0.55, 0.085, 0.68, 0.53],
+          }}
+        />
+
         {/* ── Agrafa 1 (sus) ── */}
         <div
           style={{
@@ -131,28 +266,37 @@ export default function Book({
           }}
         />
 
-        {/* ── Back cover ── */}
-        <div className="w-[200px] h-[268px] left-0 top-0 absolute bg-white rounded-[20px] shadow-[0px_1px_1px_0px_rgba(0,0,0,0.15)]" />
-
-        {/* ── Pages ── */}
-        <div
-          className="w-[200px] h-[266px] left-0 top-0 absolute bg-neutral-200 rounded-[20px]"
-          style={{
-            opacity: hovered ? 1 : 0,
-            transition: hovered
-              ? `opacity 160ms ${SPRING}`
-              : `opacity 80ms ${GRAVITY}`,
-          }}
-        />
-
         {/* ── Front cover ── */}
-        <div
-          className="w-[200px] left-0 top-0 absolute rounded-[20px] overflow-hidden"
+        <svg className="absolute w-[200px] h-[268px] left-0 top-0" style={{ pointerEvents: 'none', zIndex: 5 }}>
+          <defs>
+            <clipPath id="squircle-front">
+              <motion.path
+                d={squirclePath}
+                animate={{
+                  d: hovered 
+                    ? getSvgPath({ width: 200, height: 263, cornerRadius: 20, cornerSmoothing: 1 })
+                    : squirclePath
+                }}
+                transition={{
+                  duration: hovered ? T_IN / 1000 : T_OUT / 1000,
+                  ease: hovered ? [0.34, 1.56, 0.64, 1] : [0.4, 0, 1, 1],
+                }}
+              />
+            </clipPath>
+          </defs>
+        </svg>
+        <motion.div
+          className="w-[200px] left-0 top-0 absolute overflow-hidden"
           style={{
+            clipPath: 'url(#squircle-front)',
+            zIndex: 5,
+          }}
+          animate={{
             height: hovered ? 263 : 268,
-            transition: hovered
-              ? `height ${T_IN}ms ${SPRING}`
-              : `height ${T_OUT}ms ${GRAVITY}`,
+          }}
+          transition={{
+            duration: hovered ? T_IN / 1000 : T_OUT / 1000,
+            ease: hovered ? [0.34, 1.56, 0.64, 1] : [0.4, 0, 1, 1],
           }}
         >
           {/* Base gradient */}
@@ -171,7 +315,7 @@ export default function Book({
             <div
               className="absolute inset-0"
               style={{
-                backgroundImage: pat.backgroundImage,
+                backgroundImage: patternImage,
                 ...(pat.backgroundSize ? { backgroundSize: pat.backgroundSize } : {}),
               }}
             />
@@ -217,10 +361,13 @@ export default function Book({
 
           {/* Title — letterpress / debossed */}
           <div
-            className={`absolute inset-0 flex items-center justify-center ${palette.textClass} font-bold font-['Raleway']`}
+            className={`absolute inset-0 flex items-center justify-center ${palette.textClass} font-bold`}
             style={{
               fontSize: '19px',
-              textShadow: '-1px -1px 0px rgba(0,0,0,0.18), 1px 1px 0px rgba(255,255,255,0.09)',
+              fontFamily: 'Geist, sans-serif',
+              fontWeight: 700,
+              color: palette.textColor,
+              textShadow: palette.textShadow,
               padding: '0 20px',
               textAlign: 'center',
               lineHeight: 1.3,
@@ -229,7 +376,7 @@ export default function Book({
           >
             {title}
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
