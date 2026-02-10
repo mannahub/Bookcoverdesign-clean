@@ -401,7 +401,7 @@ export default function Book({
             zIndex: 5,
           }}
           animate={{
-            filter: hovered ? 'brightness(1.04) saturate(1.02)' : 'brightness(1)',
+            filter: hovered ? 'saturate(1.05)' : 'saturate(1)',
           }}
           transition={{
             duration: hovered ? T_IN / 1000 : T_OUT / 1000,
