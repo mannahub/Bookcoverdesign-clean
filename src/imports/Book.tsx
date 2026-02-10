@@ -261,7 +261,7 @@ export default function Book({
         />
 
         {/* ── Pages - Doua foi vizibile la hover ── */}
-        <svg className="absolute" width="190" height="256" style={{ left: 7, top: 7, pointerEvents: 'none', zIndex: 4 }}>
+        <svg className="absolute" width="190" height="256" style={{ left: 7, top: 7, pointerEvents: 'none', zIndex: 7 }}>
           <defs>
             <clipPath id={`squircle-sheet-1-${clipId}`}>
               <path d={squircleSheet1Path} />
@@ -277,7 +277,7 @@ export default function Book({
             width: 190,
             height: 256,
             clipPath: `url(#squircle-sheet-1-${clipId})`,
-            zIndex: 4,
+            zIndex: 7,
             background: '#f5f5f5',
             border: '1px solid rgba(0,0,0,0.08)',
             boxShadow: '0 2px 6px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.8)',
@@ -290,7 +290,7 @@ export default function Book({
             ease: hovered ? [0.25, 0.46, 0.45, 0.94] : [0.55, 0.085, 0.68, 0.53],
           }}
         />
-        <svg className="absolute" width="186" height="252" style={{ left: 10, top: 10, pointerEvents: 'none', zIndex: 4 }}>
+        <svg className="absolute" width="186" height="252" style={{ left: 10, top: 10, pointerEvents: 'none', zIndex: 6 }}>
           <defs>
             <clipPath id={`squircle-sheet-2-${clipId}`}>
               <path d={squircleSheet2Path} />
@@ -306,7 +306,7 @@ export default function Book({
             width: 186,
             height: 252,
             clipPath: `url(#squircle-sheet-2-${clipId})`,
-            zIndex: 4,
+            zIndex: 6,
             background: '#ebebeb',
             border: '1px solid rgba(0,0,0,0.1)',
             boxShadow: '0 2px 4px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.6)',
