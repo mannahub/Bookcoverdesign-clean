@@ -12,9 +12,9 @@ import Book, {
 } from '../../imports/Book';
 import { Button } from './ui/button';
 
-const SPRING = { type: 'spring', stiffness: 400, damping: 30 };
-const SMOOTH = { type: 'spring', stiffness: 300, damping: 25 };
-const GENTLE = { type: 'spring', stiffness: 200, damping: 20 };
+const SPRING = { type: 'spring', stiffness: 400, damping: 30 } as const;
+const SMOOTH = { type: 'spring', stiffness: 300, damping: 25 } as const;
+const GENTLE = { type: 'spring', stiffness: 200, damping: 20 } as const;
 
 /* ── Tiny inline label + hint row ── */
 function SectionHeader({ label, hint, tooltip }: { label: string; hint: string; tooltip?: string }) {
