@@ -55,11 +55,9 @@ function SectionHeader({ label, hint, tooltip }: { label: string; hint: string; 
               style={{
                 width: 16,
                 height: 16,
-                borderRadius: '50%',
-                background: 'rgba(0,0,0,0.08)',
                 cursor: 'help',
               }}
-              whileHover={{ scale: 1.1, background: 'rgba(0,0,0,0.12)' }}
+              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               transition={SPRING}
             >
