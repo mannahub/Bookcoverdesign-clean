@@ -112,7 +112,7 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Geist';
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 

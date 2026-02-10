@@ -36,7 +36,7 @@ function SectionHeader({ label, hint, tooltip }: { label: string; hint: string; 
             fontSize: 12,
             fontWeight: 600,
             color: 'rgba(0,0,0,0.6)',
-            fontFamily: 'Geist, sans-serif',
+            fontFamily: 'Geist',
             letterSpacing: '-0.01em',
           }}
         >
@@ -82,7 +82,7 @@ function SectionHeader({ label, hint, tooltip }: { label: string; hint: string; 
                     background: 'rgba(0,0,0,0.88)',
                     padding: '4px 8px',
                     borderRadius: 6,
-                    fontFamily: 'Geist, sans-serif',
+                    fontFamily: 'Geist',
                     boxShadow: '0 2px 8px rgba(0,0,0,0.16)',
                   }}
                 >
@@ -98,7 +98,7 @@ function SectionHeader({ label, hint, tooltip }: { label: string; hint: string; 
           fontSize: 12,
           fontWeight: 600,
           color: 'rgba(0,0,0,0.85)',
-          fontFamily: 'Geist, sans-serif',
+          fontFamily: 'Geist',
         }}
         key={hint}
         initial={{ opacity: 0, scale: 0.95 }}
@@ -234,14 +234,6 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
         <motion.path
           d={squircleCard}
           fill="#ffffff"
-          stroke={cardHovered ? '#7c3aed' : '#a78bfa'}
-          strokeWidth="3"
-          strokeDasharray="8 6"
-          vectorEffect="non-scaling-stroke"
-          animate={{
-            stroke: cardHovered ? '#7c3aed' : '#a78bfa',
-          }}
-          transition={SMOOTH}
         />
       </motion.svg>
       <motion.button
@@ -302,7 +294,7 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
         <motion.span
           style={{
             fontSize: 13,
-            fontFamily: 'Geist, sans-serif',
+            fontFamily: 'Geist',
             fontWeight: 500,
             letterSpacing: '-0.01em',
           }}
@@ -545,7 +537,7 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
                   fontSize: 14,
                   fontWeight: 500,
                   color: '#1a1a1a',
-                  fontFamily: 'Geist, sans-serif',
+                  fontFamily: 'Geist',
                   letterSpacing: '-0.01em',
                 }}
                 whileFocus={{

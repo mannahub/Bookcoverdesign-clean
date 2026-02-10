@@ -364,7 +364,7 @@ export default function Book({
             className={`absolute inset-0 flex items-center justify-center ${palette.textClass} font-bold`}
             style={{
               fontSize: '19px',
-              fontFamily: 'Geist, sans-serif',
+              fontFamily: 'Geist',
               fontWeight: 700,
               color: palette.textColor,
               textShadow: palette.textShadow,
