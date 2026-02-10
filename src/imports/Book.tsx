@@ -147,6 +147,13 @@ export default function Book({
   const palette = BOOK_COLORS[color];
   const pat = BOOK_PATTERNS[pattern];
 
+  // Smart text truncation based on character count
+  const displayTitle = useMemo(() => {
+    const maxChars = 12;
+    if (title.length <= maxChars) return title;
+    return title.slice(0, maxChars - 1) + '…';
+  }, [title]);
+
   // Use dark patterns for white background
   const patternImage = color === 'white' && pat.darkBackgroundImage 
     ? pat.darkBackgroundImage 
@@ -447,9 +454,11 @@ export default function Book({
               textAlign: 'center',
               lineHeight: 1.3,
               wordBreak: 'break-word',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
             }}
           >
-            {title}
+            {displayTitle}
           </div>
         </motion.div>
       </div>

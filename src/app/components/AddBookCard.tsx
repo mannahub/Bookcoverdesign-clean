@@ -263,7 +263,7 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
             height: 48,
           }}
           animate={{
-            background: cardHovered ? 'rgba(139,92,246,0.12)' : 'rgba(0,0,0,0.05)',
+            background: cardHovered ? 'rgba(139,92,246,0.18)' : 'rgba(139,92,246,0.1)',
             scale: cardHovered ? 1.1 : 1,
           }}
           transition={SMOOTH}
@@ -277,7 +277,7 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
             <Plus
               size={24}
               style={{
-                color: cardHovered ? '#7c3aed' : '#9ca3af',
+                color: cardHovered ? '#7c3aed' : '#8b5cf6',
               }}
             />
           </motion.div>
@@ -291,7 +291,7 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
           }}
           className="relative z-10"
           animate={{
-            color: cardHovered ? '#6d28d9' : '#9ca3af',
+            color: cardHovered ? '#6d28d9' : '#8b5cf6',
           }}
           transition={SMOOTH}
         >

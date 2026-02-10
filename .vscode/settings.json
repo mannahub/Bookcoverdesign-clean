@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^git -C /Users/andre/Bookcoverdesign remote set-url origin https://github\\.com/mannahub/Bookcoverdesign-clean\\.git$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}
