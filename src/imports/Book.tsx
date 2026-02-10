@@ -264,7 +264,7 @@ export default function Book({
 
         {/* ── Pages - Doua foi suprapuse + umbră ── */}
         {/* Prima pagină - alb */}
-        <svg className="absolute" width="194" height="264" style={{ left: 3, top: 2, pointerEvents: 'none', zIndex: 3 }}>
+        <svg className="absolute" width="194" height="264" style={{ left: 6, top: 2, pointerEvents: 'none', zIndex: 3 }}>
           <defs>
             <clipPath id={`squircle-sheet-1-${clipId}`}>
               <path d={squircleSheet1Path} />
@@ -275,7 +275,7 @@ export default function Book({
           className="absolute"
           initial={false}
           style={{
-            left: 3,
+            left: 6,
             top: 2,
             width: 194,
             height: 264,
@@ -292,7 +292,7 @@ export default function Book({
           }}
         />
         {/* A doua pagină - gri léger */}
-        <svg className="absolute" width="197" height="266" style={{ left: 1.5, top: 1, pointerEvents: 'none', zIndex: 3.5 }}>
+        <svg className="absolute" width="197" height="266" style={{ left: 3, top: 1, pointerEvents: 'none', zIndex: 3.5 }}>
           <defs>
             <clipPath id={`squircle-sheet-2-${clipId}`}>
               <path d={squircleSheet2Path} />
@@ -303,13 +303,13 @@ export default function Book({
           className="absolute"
           initial={false}
           style={{
-            left: 1.5,
+            left: 3,
             top: 1,
             width: 197,
             height: 266,
             clipPath: `url(#squircle-sheet-2-${clipId})`,
             zIndex: 3.5,
-            background: '#f5f5f5',
+            background: '#ececec',
           }}
           animate={{
             opacity: hovered ? 1 : 0,
@@ -337,7 +337,7 @@ export default function Book({
             height: 268,
             clipPath: `url(#squircle-shadow-${clipId})`,
             zIndex: 4,
-            boxShadow: 'inset -3px 0 8px rgba(0,0,0,0.15)',
+            boxShadow: 'inset -3px 0 6px rgba(0,0,0,0.08)',
             pointerEvents: 'none',
           }}
           animate={{
