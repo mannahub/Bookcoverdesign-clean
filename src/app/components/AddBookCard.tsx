@@ -204,7 +204,7 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
   const { squircleCard, squirclePattern, squircleInput, squircleButton, squirclePopover } = useMemo(
     () => ({
       squircleCard: getSvgPath({ width: 200, height: 268, cornerRadius: 20, cornerSmoothing: 1 }),
-      squirclePattern: getSvgPath({ width: 48, height: 48, cornerRadius: 12, cornerSmoothing: 1 }),
+      squirclePattern: getSvgPath({ width: 40, height: 40, cornerRadius: 10, cornerSmoothing: 1 }),
       squircleInput: getSvgPath({ width: 240, height: 40, cornerRadius: 10, cornerSmoothing: 1 }),
       squircleButton: getSvgPath({ width: 240, height: 40, cornerRadius: 10, cornerSmoothing: 1 }),
       squirclePopover: getSvgPath({ width: 240, height: 400, cornerRadius: 16, cornerSmoothing: 1 }),
@@ -343,7 +343,7 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
                 tooltip="Alege culoarea copertei caietului"
               />
               <motion.div
-                className="flex items-center justify-center gap-[10px]"
+                className="flex items-center justify-center gap-[10px] flex-wrap"
                 style={{ marginBottom: 0 }}
                 role="radiogroup"
                 aria-label="Selectează culoarea caietului"
@@ -403,7 +403,7 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
                 tooltip="Alege tipul foii caietului"
               />
               <motion.div
-                className="flex items-center justify-center gap-[10px]"
+                className="flex items-center justify-center gap-[10px] flex-wrap"
                 style={{ marginBottom: 0 }}
                 role="radiogroup"
                 aria-label="Selectează textura caietului"
@@ -421,7 +421,7 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
                     
                   return (
                     <div key={key} style={{ position: 'relative' }}>
-                      <svg width="48" height="48" style={{ position: 'absolute', pointerEvents: 'none' }}>
+                      <svg width="40" height="40" style={{ position: 'absolute', pointerEvents: 'none' }}>
                         <defs>
                           <clipPath id={`pattern-clip-${key}`}>
                             <path d={squirclePattern} />
@@ -436,8 +436,8 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
                         onHoverStart={() => setHoveredPattern(key)}
                         onHoverEnd={() => setHoveredPattern(null)}
                         style={{
-                          width: 48,
-                          height: 48,
+                          width: 40,
+                          height: 40,
                           position: 'relative',
                           overflow: 'hidden',
                           cursor: 'pointer',
