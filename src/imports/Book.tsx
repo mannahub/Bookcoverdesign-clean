@@ -203,8 +203,8 @@ export default function Book({
   } = useMemo(
     () => ({
       squirclePath: getSvgPath({ width: 200, height: 268, cornerRadius: 20, cornerSmoothing: 1 }),
-      squircleSheet1Path: getSvgPath({ width: 194, height: 264, cornerRadius: 19, cornerSmoothing: 1 }),
-      squircleSheet2Path: getSvgPath({ width: 197, height: 266, cornerRadius: 19.5, cornerSmoothing: 1 }),
+      squircleSheet1Path: getSvgPath({ width: 190, height: 260, cornerRadius: 19, cornerSmoothing: 1 }),
+      squircleSheet2Path: getSvgPath({ width: 195, height: 264, cornerRadius: 19.5, cornerSmoothing: 1 }),
       squircleShadowPath: getSvgPath({ width: 200, height: 268, cornerRadius: 20, cornerSmoothing: 1 }),
       squircleFrontCollapsed: getSvgPath({ width: 200, height: 268, cornerRadius: 20, cornerSmoothing: 1 }),
       squircleFrontExpanded: getSvgPath({ width: 200, height: 263, cornerRadius: 20, cornerSmoothing: 1 }),
@@ -263,8 +263,8 @@ export default function Book({
         />
 
         {/* ── Pages - Doua foi suprapuse + umbră ── */}
-        {/* Prima pagină - alb cu border vizibil */}
-        <svg className="absolute" width="194" height="264" style={{ left: 6, top: 2, pointerEvents: 'none', zIndex: 3 }}>
+        {/* Prima pagină - alb mai mică */}
+        <svg className="absolute" width="190" height="260" style={{ left: 8, top: 4, pointerEvents: 'none', zIndex: 3 }}>
           <defs>
             <clipPath id={`squircle-sheet-1-${clipId}`}>
               <path d={squircleSheet1Path} />
@@ -275,14 +275,14 @@ export default function Book({
           className="absolute"
           initial={false}
           style={{
-            left: 6,
-            top: 2,
-            width: 194,
-            height: 264,
+            left: 8,
+            top: 4,
+            width: 190,
+            height: 260,
             clipPath: `url(#squircle-sheet-1-${clipId})`,
             zIndex: 3,
             background: '#ffffff',
-            border: '1px solid rgba(0,0,0,0.12)',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.15)',
           }}
           animate={{
             opacity: hovered ? 1 : 0,
@@ -292,8 +292,8 @@ export default function Book({
             ease: hovered ? [0.25, 0.46, 0.45, 0.94] : [0.55, 0.085, 0.68, 0.53],
           }}
         />
-        {/* A doua pagină - gri cu border vizibil */}
-        <svg className="absolute" width="197" height="266" style={{ left: 3, top: 1, pointerEvents: 'none', zIndex: 3.5 }}>
+        {/* A doua pagină - gri mai mare */}
+        <svg className="absolute" width="195" height="264" style={{ left: 4, top: 2, pointerEvents: 'none', zIndex: 3.5 }}>
           <defs>
             <clipPath id={`squircle-sheet-2-${clipId}`}>
               <path d={squircleSheet2Path} />
@@ -304,14 +304,14 @@ export default function Book({
           className="absolute"
           initial={false}
           style={{
-            left: 3,
-            top: 1,
-            width: 197,
-            height: 266,
+            left: 4,
+            top: 2,
+            width: 195,
+            height: 264,
             clipPath: `url(#squircle-sheet-2-${clipId})`,
             zIndex: 3.5,
-            background: '#e8e8e8',
-            border: '1px solid rgba(0,0,0,0.15)',
+            background: '#d8d8d8',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.18)',
           }}
           animate={{
             opacity: hovered ? 1 : 0,
