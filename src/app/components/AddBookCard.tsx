@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { Plus, Info } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { getSvgPath } from 'figma-squircle';
@@ -203,28 +203,27 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
   const patternHint = BOOK_PATTERNS[hoveredPattern ?? selectedPattern].label;
 
   // ── Squircle paths ──
-  const squircleCard = getSvgPath({ width: 200, height: 268, cornerRadius: 20, cornerSmoothing: 1 });
-  const squirclePattern = getSvgPath({ width: 36, height: 36, cornerRadius: 8, cornerSmoothing: 1 });
-  const squircleInput = getSvgPath({ width: 240, height: 40, cornerRadius: 10, cornerSmoothing: 1 });
-  const squircleButton = getSvgPath({ width: 240, height: 40, cornerRadius: 10, cornerSmoothing: 1 });
-  const squirclePopover = getSvgPath({ width: 240, height: 400, cornerRadius: 16, cornerSmoothing: 1 });
+  const { squircleCard, squirclePattern, squircleInput, squircleButton, squirclePopover } = useMemo(
+    () => ({
+      squircleCard: getSvgPath({ width: 200, height: 268, cornerRadius: 20, cornerSmoothing: 1 }),
+      squirclePattern: getSvgPath({ width: 36, height: 36, cornerRadius: 8, cornerSmoothing: 1 }),
+      squircleInput: getSvgPath({ width: 240, height: 40, cornerRadius: 10, cornerSmoothing: 1 }),
+      squircleButton: getSvgPath({ width: 240, height: 40, cornerRadius: 10, cornerSmoothing: 1 }),
+      squirclePopover: getSvgPath({ width: 240, height: 400, cornerRadius: 16, cornerSmoothing: 1 }),
+    }),
+    []
+  );
 
   return (
     <motion.div 
       className="relative flex flex-col w-[200px]"
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={GENTLE}
     >
       {/* ── Trigger card with Motion and SQUIRCLE ── */}
       <motion.svg 
         width="200" 
         height="268" 
         className="absolute top-0 left-0 pointer-events-none" 
-        style={{ zIndex: -1 }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={SMOOTH}
+        style={{ zIndex: 0 }}
       >
         <defs>
           <clipPath id="squircle-trigger-card">
@@ -233,7 +232,11 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
         </defs>
         <motion.path
           d={squircleCard}
-          fill="#ffffff"
+          fill="rgba(124,58,237,0.08)"
+          animate={{
+            fill: cardHovered ? 'rgba(124,58,237,0.12)' : 'rgba(124,58,237,0.08)',
+          }}
+          transition={SMOOTH}
         />
       </motion.svg>
       <motion.button
@@ -247,24 +250,12 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
         className="mb-4 h-[268px] w-[200px] flex flex-col items-center justify-center gap-3 cursor-pointer select-none relative outline-none"
         style={{
           background: 'transparent',
+          zIndex: 1,
         }}
         transition={SMOOTH}
       >
-        {/* Background hover subtle */}
-        <motion.div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            borderRadius: 20,
-            background: 'linear-gradient(135deg, rgba(139,92,246,0.04), rgba(124,58,237,0.06))',
-          }}
-          animate={{
-            opacity: cardHovered ? 1 : 0,
-          }}
-          transition={SMOOTH}
-        />
-        
         {/* NO MORE OUTLINE BORDER */}
-        
+
         <motion.div
           className="flex items-center justify-center rounded-full relative z-10"
           style={{

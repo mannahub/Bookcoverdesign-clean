@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { motion } from 'motion/react';
 import Book, { type BookColor, type BookPattern } from "../imports/Book";
 import { AddBookCard } from "./components/AddBookCard";
 
@@ -44,20 +45,23 @@ export default function App() {
           }}
         >
           {/* Existing books */}
-          {books.map((book) => (
-            <div 
+          {books.map((book, index) => (
+            <motion.div 
               key={book.id} 
               className="flex flex-col w-[200px]"
               role="article"
               aria-label={`Caiet ${book.title.charAt(0) + book.title.slice(1).toLowerCase()}`}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, delay: index * 0.06, ease: [0.22, 0.61, 0.36, 1] }}
             >
               <div className="mb-4">
                 <Book title={book.title} color={book.color} pattern={book.pattern} />
               </div>
-              <h3 className="text-lg text-gray-900 mb-1 font-['Raleway']">
+              <h3 className="text-lg text-gray-900 mb-1 font-medium">
                 {book.title.charAt(0) + book.title.slice(1).toLowerCase()}
               </h3>
-            </div>
+            </motion.div>
           ))}
 
           {/* Add new book card */}
