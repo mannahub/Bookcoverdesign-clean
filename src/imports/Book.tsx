@@ -264,7 +264,7 @@ export default function Book({
 
         {/* ── Pages - Doua foi suprapuse + umbră ── */}
         {/* Prima pagină - alb */}
-        <svg className="absolute" width="190" height="260" style={{ left: 1, top: 1, pointerEvents: 'none', zIndex: 3 }}>
+        <svg className="absolute" width="190" height="260" style={{ left: 3, top: 3, pointerEvents: 'none', zIndex: 3 }}>
           <defs>
             <clipPath id={`squircle-sheet-1-${clipId}`}>
               <path d={squircleSheet1Path} />
@@ -275,8 +275,8 @@ export default function Book({
           className="absolute"
           initial={false}
           style={{
-            left: 1,
-            top: 1,
+            left: 3,
+            top: 3,
             width: 190,
             height: 260,
             clipPath: `url(#squircle-sheet-1-${clipId})`,
@@ -293,7 +293,7 @@ export default function Book({
           }}
         />
         {/* A doua pagină - gri foarte léger */}
-        <svg className="absolute" width="195" height="264" style={{ left: 8, top: 6, pointerEvents: 'none', zIndex: 3.5 }}>
+        <svg className="absolute" width="195" height="264" style={{ left: 5, top: 4, pointerEvents: 'none', zIndex: 3.5 }}>
           <defs>
             <clipPath id={`squircle-sheet-2-${clipId}`}>
               <path d={squircleSheet2Path} />
@@ -304,8 +304,8 @@ export default function Book({
           className="absolute"
           initial={false}
           style={{
-            left: 8,
-            top: 6,
+            left: 5,
+            top: 4,
             width: 195,
             height: 264,
             clipPath: `url(#squircle-sheet-2-${clipId})`,
@@ -321,8 +321,8 @@ export default function Book({
             ease: hovered ? [0.25, 0.46, 0.45, 0.94] : [0.55, 0.085, 0.68, 0.53],
           }}
         />
-        {/* Umbră finală cu squircle - similar cu foaia 2 */}
-        <svg className="absolute" width="195" height="264" style={{ left: 8, top: 6, pointerEvents: 'none', zIndex: 4 }}>
+        {/* Umbră finală cu squircle - exact ca foaia 2 */}
+        <svg className="absolute" width="195" height="264" style={{ left: 5, top: 4, pointerEvents: 'none', zIndex: 4 }}>
           <defs>
             <clipPath id={`squircle-shadow-${clipId}`}>
               <path d={squircleSheet2Path} />
@@ -333,8 +333,8 @@ export default function Book({
           className="absolute"
           initial={false}
           style={{
-            left: 8,
-            top: 6,
+            left: 5,
+            top: 4,
             width: 195,
             height: 264,
             clipPath: `url(#squircle-shadow-${clipId})`,
