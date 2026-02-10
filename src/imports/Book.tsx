@@ -197,6 +197,7 @@ export default function Book({
     squirclePath,
     squircleSheet1Path,
     squircleSheet2Path,
+    squircleShadowPath,
     squircleFrontCollapsed,
     squircleFrontExpanded,
   } = useMemo(
@@ -204,6 +205,7 @@ export default function Book({
       squirclePath: getSvgPath({ width: 200, height: 268, cornerRadius: 20, cornerSmoothing: 1 }),
       squircleSheet1Path: getSvgPath({ width: 194, height: 264, cornerRadius: 19, cornerSmoothing: 1 }),
       squircleSheet2Path: getSvgPath({ width: 197, height: 266, cornerRadius: 19.5, cornerSmoothing: 1 }),
+      squircleShadowPath: getSvgPath({ width: 200, height: 268, cornerRadius: 20, cornerSmoothing: 1 }),
       squircleFrontCollapsed: getSvgPath({ width: 200, height: 268, cornerRadius: 20, cornerSmoothing: 1 }),
       squircleFrontExpanded: getSvgPath({ width: 200, height: 263, cornerRadius: 20, cornerSmoothing: 1 }),
     }),
@@ -317,7 +319,14 @@ export default function Book({
             ease: hovered ? [0.25, 0.46, 0.45, 0.94] : [0.55, 0.085, 0.68, 0.53],
           }}
         />
-        {/* Umbră finală */}
+        {/* Umbră finală cu squircle */}
+        <svg className="absolute w-[200px] h-[268px] left-0 top-0" style={{ pointerEvents: 'none', zIndex: 4 }}>
+          <defs>
+            <clipPath id={`squircle-shadow-${clipId}`}>
+              <path d={squircleShadowPath} />
+            </clipPath>
+          </defs>
+        </svg>
         <motion.div
           className="absolute"
           initial={false}
@@ -326,6 +335,7 @@ export default function Book({
             top: 0,
             width: 200,
             height: 268,
+            clipPath: `url(#squircle-shadow-${clipId})`,
             zIndex: 4,
             boxShadow: 'inset -3px 0 8px rgba(0,0,0,0.15)',
             pointerEvents: 'none',
