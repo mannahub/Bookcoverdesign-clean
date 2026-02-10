@@ -263,7 +263,7 @@ export default function Book({
         />
 
         {/* ── Pages - Doua foi suprapuse + umbră ── */}
-        {/* Prima pagină - alb */}
+        {/* Prima pagină - alb cu gradient */}
         <svg className="absolute" width="194" height="264" style={{ left: 6, top: 2, pointerEvents: 'none', zIndex: 3 }}>
           <defs>
             <clipPath id={`squircle-sheet-1-${clipId}`}>
@@ -281,7 +281,7 @@ export default function Book({
             height: 264,
             clipPath: `url(#squircle-sheet-1-${clipId})`,
             zIndex: 3,
-            background: '#ffffff',
+            background: 'linear-gradient(to left, #ffffff 0%, #f8f8f8 100%)',
           }}
           animate={{
             opacity: hovered ? 1 : 0,
@@ -291,7 +291,7 @@ export default function Book({
             ease: hovered ? [0.25, 0.46, 0.45, 0.94] : [0.55, 0.085, 0.68, 0.53],
           }}
         />
-        {/* A doua pagină - gri léger */}
+        {/* A doua pagină - gri léger cu gradient */}
         <svg className="absolute" width="197" height="266" style={{ left: 3, top: 1, pointerEvents: 'none', zIndex: 3.5 }}>
           <defs>
             <clipPath id={`squircle-sheet-2-${clipId}`}>
@@ -309,7 +309,7 @@ export default function Book({
             height: 266,
             clipPath: `url(#squircle-sheet-2-${clipId})`,
             zIndex: 3.5,
-            background: '#ececec',
+            background: 'linear-gradient(to left, #f2f2f2 0%, #e6e6e6 100%)',
           }}
           animate={{
             opacity: hovered ? 1 : 0,
