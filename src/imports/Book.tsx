@@ -394,14 +394,13 @@ export default function Book({
           </defs>
         </svg>
         <motion.div
-          className="w-[200px] left-0 top-0 absolute overflow-hidden"
+          className="w-[200px] h-[268px] left-0 top-0 absolute overflow-hidden"
           initial={false}
           style={{
             clipPath: `url(#squircle-front-${clipId})`,
             zIndex: 5,
           }}
           animate={{
-            height: hovered ? 263 : 268,
             filter: hovered ? 'brightness(1.04) saturate(1.02)' : 'brightness(1)',
           }}
           transition={{
