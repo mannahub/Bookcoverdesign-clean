@@ -259,7 +259,7 @@ export default function Book({
         </svg>
         <div 
           className="w-[200px] h-[268px] left-0 top-0 absolute" 
-          style={{ clipPath: `url(#squircle-back-${clipId})`, zIndex: 1, background: palette.lo }}
+          style={{ clipPath: `url(#squircle-back-${clipId})`, zIndex: 1, background: '#e0e0e0' }}
         />
 
         {/* ── Pages - Doua foi suprapuse + umbră ── */}
