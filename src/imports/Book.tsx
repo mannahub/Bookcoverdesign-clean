@@ -248,7 +248,7 @@ export default function Book({
         }}
       >
         {/* ── Back cover ── */}
-        <svg className="absolute w-[200px] h-[268px] left-0 top-0" style={{ pointerEvents: 'none' }}>
+        <svg className="absolute w-[200px] h-[268px] left-0 top-0" style={{ pointerEvents: 'none', zIndex: 1 }}>
           <defs>
             <clipPath id={`squircle-back-${clipId}`}>
               <path d={squirclePath} />
@@ -257,40 +257,11 @@ export default function Book({
         </svg>
         <div 
           className="w-[200px] h-[268px] left-0 top-0 absolute" 
-          style={{ clipPath: `url(#squircle-back-${clipId})` }}
+          style={{ clipPath: `url(#squircle-back-${clipId})`, zIndex: 1, background: palette.lo }}
         />
 
         {/* ── Pages - Doua foi vizibile la hover ── */}
-        <svg className="absolute" width="190" height="256" style={{ left: 7, top: 7, pointerEvents: 'none', zIndex: 7 }}>
-          <defs>
-            <clipPath id={`squircle-sheet-1-${clipId}`}>
-              <path d={squircleSheet1Path} />
-            </clipPath>
-          </defs>
-        </svg>
-        <motion.div
-          className="absolute"
-          initial={false}
-          style={{
-            left: 7,
-            top: 7,
-            width: 190,
-            height: 256,
-            clipPath: `url(#squircle-sheet-1-${clipId})`,
-            zIndex: 7,
-            background: '#f5f5f5',
-            border: '1px solid rgba(0,0,0,0.08)',
-            boxShadow: '0 2px 6px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.8)',
-          }}
-          animate={{
-            opacity: hovered ? 0.92 : 0,
-          }}
-          transition={{
-            duration: hovered ? 0.18 : 0.1,
-            ease: hovered ? [0.25, 0.46, 0.45, 0.94] : [0.55, 0.085, 0.68, 0.53],
-          }}
-        />
-        <svg className="absolute" width="186" height="252" style={{ left: 10, top: 10, pointerEvents: 'none', zIndex: 6 }}>
+        <svg className="absolute" width="186" height="252" style={{ left: 10, top: 10, pointerEvents: 'none', zIndex: 3 }}>
           <defs>
             <clipPath id={`squircle-sheet-2-${clipId}`}>
               <path d={squircleSheet2Path} />
@@ -306,13 +277,40 @@ export default function Book({
             width: 186,
             height: 252,
             clipPath: `url(#squircle-sheet-2-${clipId})`,
-            zIndex: 6,
-            background: '#ebebeb',
-            border: '1px solid rgba(0,0,0,0.1)',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.6)',
+            zIndex: 3,
+            background: '#e8e8e8',
+            boxShadow: '-1px 0 3px rgba(0,0,0,0.15)',
           }}
           animate={{
-            opacity: hovered ? 0.88 : 0,
+            opacity: hovered ? 1 : 0,
+          }}
+          transition={{
+            duration: hovered ? 0.18 : 0.1,
+            ease: hovered ? [0.25, 0.46, 0.45, 0.94] : [0.55, 0.085, 0.68, 0.53],
+          }}
+        />
+        <svg className="absolute" width="190" height="256" style={{ left: 7, top: 7, pointerEvents: 'none', zIndex: 4 }}>
+          <defs>
+            <clipPath id={`squircle-sheet-1-${clipId}`}>
+              <path d={squircleSheet1Path} />
+            </clipPath>
+          </defs>
+        </svg>
+        <motion.div
+          className="absolute"
+          initial={false}
+          style={{
+            left: 7,
+            top: 7,
+            width: 190,
+            height: 256,
+            clipPath: `url(#squircle-sheet-1-${clipId})`,
+            zIndex: 4,
+            background: '#f0f0f0',
+            boxShadow: '-1px 0 4px rgba(0,0,0,0.18)',
+          }}
+          animate={{
+            opacity: hovered ? 1 : 0,
           }}
           transition={{
             duration: hovered ? 0.18 : 0.1,
