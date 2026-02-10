@@ -204,7 +204,7 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
   const { squircleCard, squirclePattern, squircleInput, squircleButton, squirclePopover } = useMemo(
     () => ({
       squircleCard: getSvgPath({ width: 200, height: 268, cornerRadius: 20, cornerSmoothing: 1 }),
-      squirclePattern: getSvgPath({ width: 36, height: 36, cornerRadius: 8, cornerSmoothing: 1 }),
+      squirclePattern: getSvgPath({ width: 48, height: 48, cornerRadius: 12, cornerSmoothing: 1 }),
       squircleInput: getSvgPath({ width: 240, height: 40, cornerRadius: 10, cornerSmoothing: 1 }),
       squircleButton: getSvgPath({ width: 240, height: 40, cornerRadius: 10, cornerSmoothing: 1 }),
       squirclePopover: getSvgPath({ width: 240, height: 400, cornerRadius: 16, cornerSmoothing: 1 }),
@@ -420,48 +420,55 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
                     : pat.backgroundImage;
                     
                   return (
-                    <motion.button
-                      key={key}
-                      role="radio"
-                      aria-checked={isSelected}
-                      aria-label={`Textură ${pat.label}`}
-                      onClick={() => setSelectedPattern(key)}
-                      onHoverStart={() => setHoveredPattern(key)}
-                      onHoverEnd={() => setHoveredPattern(null)}
-                      style={{
-                        width: 32,
-                        height: 32,
-                        borderRadius: 8,
-                        position: 'relative',
-                        overflow: 'hidden',
-                        cursor: 'pointer',
-                        flexShrink: 0,
-                        outline: 'none',
-                        border: '1px solid rgba(0,0,0,0.08)',
-                      }}
-                      animate={{
-                        scale: isSelected ? 1.08 : 1,
-                        boxShadow: isSelected
-                          ? selectedColor === 'white'
-                            ? `0 0 0 2px white, 0 0 0 3.5px ${activePalette.lo}`
-                            : `0 0 0 2px white, 0 0 0 3.5px ${activePalette.mid}`
-                          : 'none',
-                      }}
-                      whileTap={{ scale: 0.95 }}
-                      transition={SPRING}
-                      onFocus={(e) => {
-                        e.currentTarget.style.boxShadow = selectedColor === 'white'
-                          ? `0 0 0 2px white, 0 0 0 4px ${activePalette.lo}`
-                          : `0 0 0 2px white, 0 0 0 4px ${activePalette.mid}`;
-                      }}
-                      onBlur={(e) => {
-                        e.currentTarget.style.boxShadow = isSelected
-                          ? selectedColor === 'white'
-                            ? `0 0 0 2px white, 0 0 0 3.5px ${activePalette.lo}`
-                            : `0 0 0 2px white, 0 0 0 3.5px ${activePalette.mid}`
-                          : 'none';
-                      }}
-                    >
+                    <div key={key} style={{ position: 'relative' }}>
+                      <svg width="48" height="48" style={{ position: 'absolute', pointerEvents: 'none' }}>
+                        <defs>
+                          <clipPath id={`pattern-clip-${key}`}>
+                            <path d={squirclePattern} />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <motion.button
+                        role="radio"
+                        aria-checked={isSelected}
+                        aria-label={`Textură ${pat.label}`}
+                        onClick={() => setSelectedPattern(key)}
+                        onHoverStart={() => setHoveredPattern(key)}
+                        onHoverEnd={() => setHoveredPattern(null)}
+                        style={{
+                          width: 48,
+                          height: 48,
+                          position: 'relative',
+                          overflow: 'hidden',
+                          cursor: 'pointer',
+                          flexShrink: 0,
+                          outline: 'none',
+                          border: 'none',
+                          clipPath: `url(#pattern-clip-${key})`,
+                        }}
+                        animate={{
+                          scale: isSelected ? 1.08 : 1,
+                          boxShadow: isSelected
+                            ? selectedColor === 'white'
+                              ? `0 0 0 2px white, 0 0 0 3.5px ${activePalette.lo}`
+                              : `0 0 0 2px white, 0 0 0 3.5px ${activePalette.mid}`
+                            : 'none',
+                        }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={SPRING}
+                        onFocus={(e) => {
+                          e.currentTarget.style.boxShadow = selectedColor === 'white'
+                            ? `0 0 0 2px white, 0 0 0 4px ${activePalette.lo}`
+                            : `0 0 0 2px white, 0 0 0 4px ${activePalette.mid}`;
+                        }}
+                        onBlur={(e) => {
+                          e.currentTarget.style.boxShadow = isSelected
+                            ? selectedColor === 'white'
+                              ? `0 0 0 2px white, 0 0 0 3.5px ${activePalette.lo}`
+                              : `0 0 0 2px white, 0 0 0 3.5px ${activePalette.mid}`
+                            : 'none';
+                        }}
+                      >
                       {/* Gradient base */}
                       <motion.div
                         style={{
@@ -489,6 +496,7 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
                         />
                       )}
                     </motion.button>
+                    </div>
                   );
                 })}
               </motion.div>
