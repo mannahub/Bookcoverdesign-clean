@@ -195,7 +195,6 @@ export default function Book({
   // ── Squircle paths ──
   const {
     squirclePath,
-    squirclePagePath,
     squircleSheet1Path,
     squircleSheet2Path,
     squircleFrontCollapsed,
@@ -203,7 +202,6 @@ export default function Book({
   } = useMemo(
     () => ({
       squirclePath: getSvgPath({ width: 200, height: 268, cornerRadius: 20, cornerSmoothing: 1 }),
-      squirclePagePath: getSvgPath({ width: 196, height: 262, cornerRadius: 20, cornerSmoothing: 1 }),
       squircleSheet1Path: getSvgPath({ width: 190, height: 256, cornerRadius: 18, cornerSmoothing: 1 }),
       squircleSheet2Path: getSvgPath({ width: 186, height: 252, cornerRadius: 18, cornerSmoothing: 1 }),
       squircleFrontCollapsed: getSvgPath({ width: 200, height: 268, cornerRadius: 20, cornerSmoothing: 1 }),
@@ -263,30 +261,6 @@ export default function Book({
         />
 
         {/* ── Pages - Doua foi vizibile la hover ── */}
-        <svg className="absolute w-[196px] h-[262px] left-[4px] top-[4px]" style={{ pointerEvents: 'none', zIndex: 3 }}>
-          <defs>
-            <clipPath id={`squircle-page-${clipId}`}>
-              <path d={squirclePagePath} />
-            </clipPath>
-          </defs>
-        </svg>
-        <motion.div
-          className="w-[196px] h-[262px] left-[4px] top-[4px] absolute"
-          initial={false}
-          style={{
-            clipPath: `url(#squircle-page-${clipId})`,
-            zIndex: 3,
-            background: '#c8c8c8',
-            boxShadow: '0 2px 6px rgba(0,0,0,0.15), inset 0 1px 2px rgba(255,255,255,0.3)',
-          }}
-          animate={{
-            opacity: hovered ? 1 : 0,
-          }}
-          transition={{
-            duration: hovered ? 0.2 : 0.1,
-            ease: hovered ? [0.25, 0.46, 0.45, 0.94] : [0.55, 0.085, 0.68, 0.53],
-          }}
-        />
         <svg className="absolute" width="190" height="256" style={{ left: 7, top: 7, pointerEvents: 'none', zIndex: 4 }}>
           <defs>
             <clipPath id={`squircle-sheet-1-${clipId}`}>
@@ -304,12 +278,11 @@ export default function Book({
             height: 256,
             clipPath: `url(#squircle-sheet-1-${clipId})`,
             zIndex: 4,
-            background: 'linear-gradient(to left, rgba(245,245,245,0.95), rgba(245,245,245,0.1))',
-            boxShadow: '0 2px 6px rgba(0,0,0,0.08)',
+            background: '#ffffff',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
           }}
           animate={{
             opacity: hovered ? 0.85 : 0,
-            boxShadow: hovered ? '0 2px 6px rgba(0,0,0,0.08)' : '0 0 0 rgba(0,0,0,0)',
           }}
           transition={{
             duration: hovered ? 0.18 : 0.1,
@@ -333,7 +306,8 @@ export default function Book({
             height: 252,
             clipPath: `url(#squircle-sheet-2-${clipId})`,
             zIndex: 4,
-            background: 'linear-gradient(to left, rgba(235,235,235,0.9), rgba(235,235,235,0.08))',
+            background: '#fafafa',
+            boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
           }}
           animate={{
             opacity: hovered ? 0.7 : 0,
