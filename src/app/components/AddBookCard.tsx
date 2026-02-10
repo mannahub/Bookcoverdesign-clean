@@ -415,9 +415,31 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
                   const pat = BOOK_PATTERNS[key];
                   const isSelected = key === selectedPattern;
                   const isHovered = key === hoveredPattern;
-                  const patternImage = selectedColor === 'white' && pat.darkBackgroundImage 
+                  
+                  // Enhanced visibility for pattern preview - increase opacity
+                  let patternImagePreview = selectedColor === 'white' && pat.darkBackgroundImage 
                     ? pat.darkBackgroundImage 
                     : pat.backgroundImage;
+                  
+                  // Boost pattern visibility in preview buttons
+                  if (key !== 'simplu') {
+                    if (selectedColor === 'white') {
+                      // For white backgrounds, make dark patterns more visible
+                      patternImagePreview = patternImagePreview
+                        .replace(/rgba\(0,0,0,0\.06\)/g, 'rgba(0,0,0,0.18)')
+                        .replace(/rgba\(0,0,0,0\.07\)/g, 'rgba(0,0,0,0.2)')
+                        .replace(/rgba\(0,0,0,0\.08\)/g, 'rgba(0,0,0,0.22)')
+                        .replace(/rgba\(0,0,0,0\.1\)/g, 'rgba(0,0,0,0.25)');
+                    } else {
+                      // For colored backgrounds, make light patterns more visible
+                      patternImagePreview = patternImagePreview
+                        .replace(/rgba\(255,255,255,0\.1\)/g, 'rgba(255,255,255,0.35)')
+                        .replace(/rgba\(255,255,255,0\.12\)/g, 'rgba(255,255,255,0.4)')
+                        .replace(/rgba\(255,255,255,0\.13\)/g, 'rgba(255,255,255,0.42)')
+                        .replace(/rgba\(255,255,255,0\.15\)/g, 'rgba(255,255,255,0.45)')
+                        .replace(/rgba\(255,255,255,0\.18\)/g, 'rgba(255,255,255,0.5)');
+                    }
+                  }
                     
                   return (
                     <div key={key} style={{ position: 'relative' }}>
@@ -486,7 +508,7 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
                           style={{
                             position: 'absolute',
                             inset: 0,
-                            backgroundImage: patternImage,
+                            backgroundImage: patternImagePreview,
                             ...(pat.backgroundSize ? { backgroundSize: pat.backgroundSize } : {}),
                             opacity: 1,
                           }}
