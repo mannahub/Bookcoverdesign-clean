@@ -329,11 +329,9 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
                 maxWidth: '100vw',
                 padding: '20px 20px calc(20px + env(safe-area-inset-bottom))',
                 borderRadius: '16px 16px 0 0',
-                background: 'rgba(255,255,255,0.98)',
+                background: '#ffffff',
                 backdropFilter: 'blur(20px)',
                 WebkitBackdropFilter: 'blur(20px)',
-                border: '1px solid rgba(0,0,0,0.06)',
-                boxShadow: '0 -4px 24px rgba(0,0,0,0.12), 0 -2px 8px rgba(0,0,0,0.06)',
               }}
               initial={{ y: '100%', opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}

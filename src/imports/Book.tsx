@@ -399,6 +399,7 @@ export default function Book({
               style={{
                 backgroundImage: patternImage,
                 ...(pat.backgroundSize ? { backgroundSize: pat.backgroundSize } : {}),
+                opacity: 0.35,
               }}
             />
           )}
