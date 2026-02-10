@@ -467,24 +467,30 @@ export default function Book({
 
           {/* Title — letterpress / debossed */}
           <div
-            className={`absolute inset-0 flex items-center justify-center ${palette.textClass} font-bold`}
+            className={`absolute inset-0 flex items-center justify-center ${palette.textClass}`}
             style={{
-              fontSize: `${fontSize}px`,
-              fontFamily: 'Geist',
-              fontWeight: 700,
-              color: palette.textColor,
-              textShadow: palette.textShadow,
               padding: '0 20px',
-              textAlign: 'center',
-              lineHeight: 1.3,
-              wordBreak: 'break-word',
-              display: '-webkit-box',
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: 'vertical',
-              overflow: 'hidden',
             }}
           >
-            {displayTitle}
+            <div
+              className="font-bold"
+              style={{
+                fontSize: `${fontSize}px`,
+                fontFamily: 'Geist',
+                fontWeight: 700,
+                color: palette.textColor,
+                textShadow: palette.textShadow,
+                textAlign: 'center',
+                lineHeight: 1.3,
+                wordBreak: 'break-word',
+                display: '-webkit-box',
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: 'vertical',
+                overflow: 'hidden',
+              }}
+            >
+              {displayTitle}
+            </div>
           </div>
         </motion.div>
       </div>
