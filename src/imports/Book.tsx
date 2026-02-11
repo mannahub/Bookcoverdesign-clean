@@ -3,7 +3,7 @@ import { getSvgPath } from 'figma-squircle';
 import { motion } from 'motion/react';
 
 // ── Color palettes ───────────────────────────────────────────
-export type BookColor = 'violet' | 'blue' | 'emerald' | 'rose' | 'amber' | 'slate' | 'white';
+export type BookColor = 'red' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple' | 'white';
 
 export const BOOK_COLORS: Record<BookColor, {
   hi: string; mid: string; lo: string;
@@ -12,51 +12,51 @@ export const BOOK_COLORS: Record<BookColor, {
   textColor: string;
   textShadow: string;
 }> = {
-  violet:  { 
-    hi: '#a78bfa', mid: '#8b5cf6', lo: '#7c3aed', 
-    spine: '#8b5cf6', edge: 'rgba(109,40,217,0.6)',  
+  red:  { 
+    hi: '#ff5a51', mid: '#E8433B', lo: '#d13833', 
+    spine: '#E8433B', edge: 'rgba(209,56,51,0.6)',  
     textClass: 'text-white',  
-    label: 'Violet',
-    textColor: 'rgba(255,255,255,0.98)',
-    textShadow: '0 1px 0 rgba(0,0,0,0.25), 0 -1px 0 rgba(255,255,255,0.12)'
-  },
-  blue:    { 
-    hi: '#60a5fa', mid: '#3b82f6', lo: '#2563eb', 
-    spine: '#3b82f6', edge: 'rgba(29,78,216,0.6)',   
-    textClass: 'text-white',    
-    label: 'Albastru',
-    textColor: 'rgba(255,255,255,0.98)',
-    textShadow: '0 1px 0 rgba(0,0,0,0.25), 0 -1px 0 rgba(255,255,255,0.12)'
-  },
-  emerald: { 
-    hi: '#34d399', mid: '#10b981', lo: '#059669', 
-    spine: '#10b981', edge: 'rgba(4,120,87,0.6)',     
-    textClass: 'text-white', 
-    label: 'Verde',
-    textColor: 'rgba(255,255,255,0.98)',
-    textShadow: '0 1px 0 rgba(0,0,0,0.25), 0 -1px 0 rgba(255,255,255,0.12)'
-  },
-  rose:    { 
-    hi: '#fb7185', mid: '#f43f5e', lo: '#e11d48', 
-    spine: '#f43f5e', edge: 'rgba(190,18,60,0.6)',   
-    textClass: 'text-white',    
     label: 'Roșu',
     textColor: 'rgba(255,255,255,0.98)',
     textShadow: '0 1px 0 rgba(0,0,0,0.25), 0 -1px 0 rgba(255,255,255,0.12)'
   },
-  amber:   { 
-    hi: '#fcd34d', mid: '#f59e0b', lo: '#d97706', 
-    spine: '#f59e0b', edge: 'rgba(180,83,9,0.6)',   
-    textClass: 'text-amber-950',   
-    label: 'Auriu',
-    textColor: 'rgba(20,16,5,0.88)',
-    textShadow: '0 1px 0 rgba(255,255,255,0.4), 0 -1px 0 rgba(0,0,0,0.15)'
+  orange:    { 
+    hi: '#ffad33', mid: '#FC9900', lo: '#e38800', 
+    spine: '#FC9900', edge: 'rgba(227,136,0,0.6)',   
+    textClass: 'text-white',    
+    label: 'Portocaliu',
+    textColor: 'rgba(255,255,255,0.98)',
+    textShadow: '0 1px 0 rgba(0,0,0,0.25), 0 -1px 0 rgba(255,255,255,0.12)'
   },
-  slate:   { 
-    hi: '#64748b', mid: '#475569', lo: '#334155', 
-    spine: '#475569', edge: 'rgba(30,41,59,0.6)',   
+  yellow: { 
+    hi: '#ffeba6', mid: '#FEDD3C', lo: '#e5c722', 
+    spine: '#FEDD3C', edge: 'rgba(229,199,34,0.6)',     
+    textClass: 'text-amber-900', 
+    label: 'Galben',
+    textColor: 'rgba(120,53,15,0.92)',
+    textShadow: '0 1px 0 rgba(255,255,255,0.5), 0 -1px 0 rgba(0,0,0,0.12)'
+  },
+  green:    { 
+    hi: '#6ec56f', mid: '#4EA950', lo: '#3d8a40', 
+    spine: '#4EA950', edge: 'rgba(61,138,64,0.6)',   
+    textClass: 'text-white',    
+    label: 'Verde',
+    textColor: 'rgba(255,255,255,0.98)',
+    textShadow: '0 1px 0 rgba(0,0,0,0.25), 0 -1px 0 rgba(255,255,255,0.12)'
+  },
+  blue:   { 
+    hi: '#5baaf5', mid: '#2392E9', lo: '#1a79c7', 
+    spine: '#2392E9', edge: 'rgba(26,121,199,0.6)',   
     textClass: 'text-white',   
-    label: 'Gri închis',
+    label: 'Albastru',
+    textColor: 'rgba(255,255,255,0.98)',
+    textShadow: '0 1px 0 rgba(0,0,0,0.25), 0 -1px 0 rgba(255,255,255,0.12)'
+  },
+  purple:   { 
+    hi: '#b854d4', mid: '#9926B2', lo: '#7d1f93', 
+    spine: '#9926B2', edge: 'rgba(125,31,147,0.6)',   
+    textClass: 'text-white',   
+    label: 'Violet',
     textColor: 'rgba(255,255,255,0.98)',
     textShadow: '0 1px 0 rgba(0,0,0,0.25), 0 -1px 0 rgba(255,255,255,0.12)'
   },
@@ -70,7 +70,7 @@ export const BOOK_COLORS: Record<BookColor, {
   },
 };
 
-export const COLOR_KEYS: BookColor[] = ['violet', 'blue', 'emerald', 'rose', 'amber', 'slate', 'white'];
+export const COLOR_KEYS: BookColor[] = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'white'];
 
 // ── Patterns ─────────────────────────────────────────────────
 export type BookPattern = 'simplu' | 'dictando' | 'matematica' | 'romana' | 'punctat';
@@ -139,7 +139,7 @@ interface BookProps {
 export default function Book({
   className,
   title = "HANDBOOK",
-  color = 'violet',
+  color = 'purple',
   pattern = 'simplu',
 }: BookProps) {
   const clipId = useId();
@@ -175,8 +175,8 @@ export default function Book({
     };
   }, [title]);
 
-  // Use dark patterns for white background
-  const patternImage = color === 'white' && pat.darkBackgroundImage 
+  // Use dark patterns for white and yellow backgrounds
+  const patternImage = (color === 'white' || color === 'yellow') && pat.darkBackgroundImage 
     ? pat.darkBackgroundImage 
     : pat.backgroundImage;
 
@@ -283,9 +283,11 @@ export default function Book({
             zIndex: 3,
             background: '#ffffff',
             border: '1px solid rgba(0,0,0,0.15)',
+            transformStyle: 'flat',
           }}
           animate={{
             opacity: hovered ? 1 : 0,
+            x: hovered ? 2 : 0,
           }}
           transition={{
             duration: hovered ? 0.18 : 0.1,
@@ -312,9 +314,11 @@ export default function Book({
             zIndex: 3.5,
             background: '#f8f8f8',
             border: '1px solid rgba(0,0,0,0.18)',
+            transformStyle: 'flat',
           }}
           animate={{
             opacity: hovered ? 1 : 0,
+            x: hovered ? 4 : 0,
           }}
           transition={{
             duration: hovered ? 0.18 : 0.1,
@@ -376,7 +380,7 @@ export default function Book({
         />
 
         {/* ── Front cover ── */}
-        <svg className="absolute w-[200px] h-[268px] left-0 top-0" style={{ pointerEvents: 'none', zIndex: 5 }}>
+        <svg className="absolute w-[200px] h-[268px] left-0 top-0" style={{ pointerEvents: 'none', zIndex: 12 }}>
           <defs>
             <clipPath id={`squircle-front-${clipId}`}>
               <motion.path
@@ -398,7 +402,7 @@ export default function Book({
           initial={false}
           style={{
             clipPath: `url(#squircle-front-${clipId})`,
-            zIndex: 5,
+            zIndex: 12,
           }}
           animate={{
             filter: hovered ? 'saturate(1.05)' : 'saturate(1)',

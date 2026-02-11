@@ -11,7 +11,11 @@
     "allowJs": false,
     "isolatedModules": true,
     "resolveJsonModule": true,
-    "useDefineForClassFields": true
+    "useDefineForClassFields": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": ["src", "vite.config.ts"],
   "exclude": ["node_modules", "dist"]

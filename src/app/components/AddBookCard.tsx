@@ -133,7 +133,7 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
   const [open, setOpen] = useState(false);
   const [cardHovered, setCardHovered] = useState(false);
 
-  const [selectedColor, setSelectedColor] = useState<BookColor>('violet');
+  const [selectedColor, setSelectedColor] = useState<BookColor>('purple');
   const [selectedPattern, setSelectedPattern] = useState<BookPattern>('simplu');
   const [title, setTitle] = useState('');
 
@@ -186,7 +186,7 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
     if (!trimmed) return;
     onAdd(trimmed.toUpperCase(), selectedColor, selectedPattern);
     setTitle('');
-    setSelectedColor('violet');
+    setSelectedColor('purple');
     setSelectedPattern('simplu');
     setOpen(false);
   }
@@ -351,7 +351,7 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ ...GENTLE, delay: 0.05 }}
               >
-                {COLOR_KEYS.map((key) => {
+                {COLOR_KEYS.filter(key => key !== 'white').map((key) => {
                   const c = BOOK_COLORS[key];
                   const isSelected = key === selectedColor;
                   return (
@@ -417,14 +417,14 @@ export function AddBookCard({ onAdd }: AddBookCardProps) {
                   const isHovered = key === hoveredPattern;
                   
                   // Enhanced visibility for pattern preview - increase opacity
-                  let patternImagePreview = selectedColor === 'white' && pat.darkBackgroundImage 
+                  let patternImagePreview = (selectedColor === 'white' || selectedColor === 'yellow') && pat.darkBackgroundImage 
                     ? pat.darkBackgroundImage 
                     : pat.backgroundImage;
                   
                   // Boost pattern visibility in preview buttons
                   if (key !== 'simplu') {
-                    if (selectedColor === 'white') {
-                      // For white backgrounds, make dark patterns more visible
+                    if (selectedColor === 'white' || selectedColor === 'yellow') {
+                      // For white/yellow backgrounds, make dark patterns more visible
                       patternImagePreview = patternImagePreview
                         .replace(/rgba\(0,0,0,0\.06\)/g, 'rgba(0,0,0,0.18)')
                         .replace(/rgba\(0,0,0,0\.07\)/g, 'rgba(0,0,0,0.2)')
